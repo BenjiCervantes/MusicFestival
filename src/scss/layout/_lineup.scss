@@ -1,0 +1,70 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+
+.lineup {
+    background-color: v.$pink;
+
+
+    h3,
+    .day {
+        color: v.$white;
+        text-align: center;
+    }
+
+    .day {
+        font-size: 3rem;
+        text-transform: uppercase;
+    }
+
+
+}
+
+.stage-container {
+    @include m.container;
+
+    @include m.tablet {
+        @include m.grid(2);
+    }
+}
+
+.stage {
+    padding-top: 1rem;
+    margin-bottom: 5rem;
+
+    @include m.tablet {
+        margin-bottom: 0;
+    }
+
+    .stage-name {
+        text-transform: uppercase;
+        font-weight: 900;
+        text-align: center;
+        font-size: 3rem;
+    }
+
+
+}
+
+.calendar {
+    @include m.reset-list;
+
+    li {
+        padding: 2.5rem;
+        font-weight: 700;
+
+        span {
+            font-weight: 400;
+        }
+    }
+}
+
+.bg-green {
+    background-color: v.$green;
+    @include m.odd-list-color(v.$green);
+}
+
+.bg-yellow {
+    background-color: v.$yellow;
+    @include m.odd-list-color(v.$yellow);
+}
