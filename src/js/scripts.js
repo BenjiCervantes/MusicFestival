@@ -1,6 +1,56 @@
 document.addEventListener('DOMContentLoaded', () => {
+    fixedNavigation();
     createGallery();
-})
+    linkHeaderColor();
+    scrollNav();
+});
+scrollNav = () => {
+    const navLinks = document.querySelectorAll('.main-navigation a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            const sectionScroll = e.target.getAttribute('href');
+            const section = document.querySelector(sectionScroll);
+            section.scrollIntoView({ behavior: 'smooth' });
+        })
+    })
+}
+linkHeaderColor = () => {
+    document.addEventListener('scroll', () => {
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.main-navigation a');
+        let actualSection = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (window.scrollY >= (sectionTop - sectionHeight / 3)) {
+                actualSection = section.id;
+            }
+        });
+
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === '#' + actualSection) {
+                link.classList.add('active');
+            }
+            else {
+                link.classList.remove('active');
+            }
+        })
+    })
+}
+
+fixedNavigation = () => {
+    const header = document.querySelector('.header');
+    const about = document.querySelector('.about-festival');
+    window.addEventListener('scroll', () => {
+        if (about.getBoundingClientRect().bottom < 1) {
+            header.classList.add('fixed')
+        }
+        else {
+            header.classList.remove('fixed')
+        }
+    })
+}
 
 createGallery = () => {
     const gallery = document.querySelector('.gallery-images');
